@@ -6,6 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		67BB29072FA264260009B62A /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 67BB29012FA264260009B62A /* Domain */; };
+		67BB29082FA264260009B62A /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 67BB29022FA264260009B62A /* Networking */; };
+		67BB29092FA264260009B62A /* Persistence in Frameworks */ = {isa = PBXBuildFile; productRef = 67BB29032FA264260009B62A /* Persistence */; };
+		67BB290A2FA264260009B62A /* BreedsListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 67BB29042FA264260009B62A /* BreedsListFeature */; };
+		67BB290B2FA264260009B62A /* BreedDetailFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 67BB29052FA264260009B62A /* BreedDetailFeature */; };
+		67BB290C2FA264260009B62A /* FavouritesFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 67BB29062FA264260009B62A /* FavouritesFeature */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		67BB28162FA264260009B62A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -53,6 +62,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67BB29072FA264260009B62A /* Domain in Frameworks */,
+				67BB29082FA264260009B62A /* Networking in Frameworks */,
+				67BB29092FA264260009B62A /* Persistence in Frameworks */,
+				67BB290A2FA264260009B62A /* BreedsListFeature in Frameworks */,
+				67BB290B2FA264260009B62A /* BreedDetailFeature in Frameworks */,
+				67BB290C2FA264260009B62A /* FavouritesFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +129,12 @@
 			);
 			name = CatBreeds;
 			packageProductDependencies = (
+				67BB29012FA264260009B62A /* Domain */,
+				67BB29022FA264260009B62A /* Networking */,
+				67BB29032FA264260009B62A /* Persistence */,
+				67BB29042FA264260009B62A /* BreedsListFeature */,
+				67BB29052FA264260009B62A /* BreedDetailFeature */,
+				67BB29062FA264260009B62A /* FavouritesFeature */,
 			);
 			productName = CatBreeds;
 			productReference = 67BB28082FA264240009B62A /* CatBreeds.app */;
@@ -197,6 +218,9 @@
 			);
 			mainGroup = 67BB27FF2FA264240009B62A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				67BB29002FA264260009B62A /* XCLocalSwiftPackageReference "Modules" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 67BB28092FA264240009B62A /* Products */;
 			projectDirPath = "";
@@ -586,6 +610,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		67BB29002FA264260009B62A /* XCLocalSwiftPackageReference "Modules" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Modules;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		67BB29012FA264260009B62A /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		67BB29022FA264260009B62A /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Networking;
+		};
+		67BB29032FA264260009B62A /* Persistence */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Persistence;
+		};
+		67BB29042FA264260009B62A /* BreedsListFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BreedsListFeature;
+		};
+		67BB29052FA264260009B62A /* BreedDetailFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BreedDetailFeature;
+		};
+		67BB29062FA264260009B62A /* FavouritesFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FavouritesFeature;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 67BB28002FA264240009B62A /* Project object */;
 }
