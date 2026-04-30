@@ -15,7 +15,11 @@ let package = Package(
     targets: [
         .target(name: "Domain"),
         .target(name: "Networking", dependencies: ["Domain"]),
-        .target(name: "Persistence", dependencies: ["Domain"]),
+        .target(
+            name: "Persistence",
+            dependencies: ["Domain"],
+            swiftSettings: [.enableExperimentalFeature("StrictConcurrency")]
+        ),
         .target(name: "BreedsListFeature", dependencies: ["Domain"]),
         .target(name: "BreedDetailFeature", dependencies: ["Domain"]),
         .target(name: "FavouritesFeature", dependencies: ["Domain"]),
