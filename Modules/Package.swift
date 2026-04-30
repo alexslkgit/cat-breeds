@@ -22,7 +22,7 @@ let package = Package(
         ),
         .target(name: "BreedsListFeature", dependencies: ["Domain"]),
         .target(name: "BreedDetailFeature", dependencies: ["Domain"]),
-        .target(name: "FavouritesFeature", dependencies: ["Domain"]),
+        .target(name: "FavouritesFeature", dependencies: ["Domain", "BreedsListFeature", "BreedDetailFeature"]),
         .testTarget(name: "DomainTests", dependencies: ["Domain"]),
         .testTarget(name: "NetworkingTests", dependencies: ["Networking"]),
         .testTarget(name: "PersistenceTests", dependencies: ["Persistence"]),
