@@ -10,25 +10,20 @@ public struct BreedListView: View {
     }
 
     public var body: some View {
-        NavigationStack {
-            content
-                .navigationTitle("Cat Breeds")
-                .searchable(text: $viewModel.searchQuery, prompt: "Search breeds")
-                .onChange(of: viewModel.searchQuery) { _, _ in
-                    scheduleSearch()
+        content
+            .navigationTitle("Cat Breeds")
+            .searchable(text: $viewModel.searchQuery, prompt: "Search breeds")
+            .onChange(of: viewModel.searchQuery) { _, _ in
+                scheduleSearch()
+            }
+            .task {
+                if viewModel.breeds.isEmpty {
+                    await viewModel.loadNextPage()
                 }
-                .navigationDestination(for: String.self) { breedId in
-                    Text("Detail: \(breedId)")
-                }
-                .task {
-                    if viewModel.breeds.isEmpty {
-                        await viewModel.loadNextPage()
-                    }
-                }
-                .task {
-                    await viewModel.startObservingFavourites()
-                }
-        }
+            }
+            .task {
+                await viewModel.startObservingFavourites()
+            }
     }
 
     @ViewBuilder

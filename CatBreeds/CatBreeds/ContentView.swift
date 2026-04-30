@@ -1,24 +1,51 @@
-//
-//  ContentView.swift
-//  CatBreeds
-//
-//  Created by Slobodianiuk Oleksandr on 29.04.2026.
-//
-
 import SwiftUI
+import Domain
+import BreedsListFeature
+import BreedDetailFeature
+import FavouritesFeature
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    let breedRepository: BreedRepository
+    let favouritesStore: FavouritesStore
 
-#Preview {
-    ContentView()
+    var body: some View {
+        TabView {
+            NavigationStack {
+                BreedListView(
+                    viewModel: BreedListViewModel(
+                        breedRepository: breedRepository,
+                        favouritesStore: favouritesStore
+                    )
+                )
+                .navigationDestination(for: String.self) { breedId in
+                    BreedDetailView(
+                        breedId: breedId,
+                        viewModel: BreedDetailViewModel(
+                            breedRepository: breedRepository,
+                            favouritesStore: favouritesStore
+                        )
+                    )
+                }
+            }
+            .tabItem {
+                Label("Breeds", systemImage: "list.bullet")
+            }
+
+            FavouritesView(
+                viewModel: FavouritesViewModel(
+                    breedRepository: breedRepository,
+                    favouritesStore: favouritesStore
+                ),
+                makeDetailViewModel: {
+                    BreedDetailViewModel(
+                        breedRepository: breedRepository,
+                        favouritesStore: favouritesStore
+                    )
+                }
+            )
+            .tabItem {
+                Label("Favourites", systemImage: "star")
+            }
+        }
+    }
 }
