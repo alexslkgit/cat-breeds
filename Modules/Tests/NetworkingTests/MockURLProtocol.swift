@@ -1,3 +1,10 @@
+//
+//  MockURLProtocol.swift
+//  NetworkingTests
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Foundation
 
 final class MockURLProtocol: URLProtocol {

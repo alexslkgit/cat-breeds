@@ -1,9 +1,22 @@
+//
+//  FavouritesView.swift
+//  FavouritesFeature
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import SwiftUI
 import Domain
 import BreedsListFeature
 import BreedDetailFeature
 
 public struct FavouritesView: View {
+    private static let navigationTitle = "Favourites"
+    private static let emptyTitle = "No favourites yet"
+    private static let dismissTitle = "Dismiss"
+    private static let averageLifespanTitle = "Average lifespan"
+    private static let averageLifespanFormat = "%.1f years"
+
     @State private var viewModel: FavouritesViewModel
     private let makeDetailViewModel: () -> BreedDetailViewModel
 
@@ -18,7 +31,7 @@ public struct FavouritesView: View {
     public var body: some View {
         NavigationStack {
             content
-                .navigationTitle("Favourites")
+                .navigationTitle(Self.navigationTitle)
                 .navigationDestination(for: String.self) { breedId in
                     BreedDetailView(breedId: breedId, viewModel: makeDetailViewModel())
                 }
@@ -31,44 +44,58 @@ public struct FavouritesView: View {
     @ViewBuilder
     private var content: some View {
         if viewModel.breeds.isEmpty {
-            VStack(spacing: 12) {
-                Image(systemName: "star")
-                    .font(.system(size: 44))
-                    .foregroundStyle(.secondary)
-                Text("No favourites yet")
-                    .font(.headline)
-                    .foregroundStyle(.secondary)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            ContentUnavailableView(Self.emptyTitle, systemImage: "star")
         } else {
-            List {
-                if let message = viewModel.errorMessage {
-                    HStack {
-                        Text(message)
-                            .font(.footnote)
-                            .foregroundStyle(.red)
-                        Spacer()
-                        Button("Dismiss") {
-                            viewModel.errorMessage = nil
-                        }
-                        .font(.footnote)
-                    }
-                }
+            populatedList
+        }
+    }
 
-                ForEach(viewModel.breeds) { breed in
-                    BreedRowView(
-                        breed: breed,
-                        isFavourite: true,
-                        onToggleFavourite: { id in
-                            Task { await viewModel.removeFavourite(breedId: id) }
-                        }
-                    )
-                }
+    private var populatedList: some View {
+        List {
+            if let average = viewModel.averageLifespan {
+                averageLifespanHeader(value: average)
             }
-            .listStyle(.plain)
-            .refreshable {
-                await viewModel.load()
+
+            if let message = viewModel.errorMessage {
+                errorBanner(message: message)
             }
+
+            ForEach(viewModel.breeds) { breed in
+                BreedRowView(
+                    breed: breed,
+                    isFavourite: true,
+                    onToggleFavourite: { id in
+                        Task { await viewModel.removeFavourite(breedId: id) }
+                    }
+                )
+            }
+        }
+        .listStyle(.plain)
+        .refreshable {
+            await viewModel.load()
+        }
+    }
+
+    private func averageLifespanHeader(value: Double) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(Self.averageLifespanTitle.uppercased())
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Text(String(format: Self.averageLifespanFormat, value))
+                .font(.body)
+        }
+    }
+
+    private func errorBanner(message: String) -> some View {
+        HStack {
+            Text(message)
+                .font(.footnote)
+                .foregroundStyle(.red)
+            Spacer()
+            Button(Self.dismissTitle) {
+                viewModel.errorMessage = nil
+            }
+            .font(.footnote)
         }
     }
 }

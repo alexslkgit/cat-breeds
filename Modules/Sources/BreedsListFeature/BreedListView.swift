@@ -1,9 +1,20 @@
+//
+//  BreedListView.swift
+//  BreedsListFeature
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import SwiftUI
 import Domain
 
 public struct BreedListView: View {
+    private static let navigationTitle = "Cat Breeds"
+    private static let searchPrompt = "Search breeds"
+    private static let dismissTitle = "Dismiss"
+    private static let tryAgainTitle = "Try Again"
+
     @State private var viewModel: BreedListViewModel
-    @State private var searchTask: Task<Void, Never>?
 
     public init(viewModel: BreedListViewModel) {
         self._viewModel = State(wrappedValue: viewModel)
@@ -11,10 +22,13 @@ public struct BreedListView: View {
 
     public var body: some View {
         content
-            .navigationTitle("Cat Breeds")
-            .searchable(text: $viewModel.searchQuery, prompt: "Search breeds")
+            .navigationTitle(Self.navigationTitle)
+            #if os(iOS)
+            .navigationBarTitleDisplayMode(.large)
+            #endif
+            .searchable(text: $viewModel.searchQuery, prompt: Self.searchPrompt)
             .onChange(of: viewModel.searchQuery) { _, _ in
-                scheduleSearch()
+                viewModel.queryDidChange()
             }
             .task {
                 if viewModel.breeds.isEmpty {
@@ -76,7 +90,7 @@ public struct BreedListView: View {
                 .font(.footnote)
                 .foregroundStyle(.red)
             Spacer()
-            Button("Dismiss") {
+            Button(Self.dismissTitle) {
                 viewModel.errorMessage = nil
             }
             .font(.footnote)
@@ -88,21 +102,12 @@ public struct BreedListView: View {
             Text(message)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
-            Button("Try Again") {
+            Button(Self.tryAgainTitle) {
                 viewModel.errorMessage = nil
                 Task { await viewModel.loadNextPage() }
             }
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private func scheduleSearch() {
-        searchTask?.cancel()
-        searchTask = Task {
-            try? await Task.sleep(nanoseconds: 300_000_000)
-            if Task.isCancelled { return }
-            await viewModel.search()
-        }
     }
 }

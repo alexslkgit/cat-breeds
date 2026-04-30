@@ -1,6 +1,16 @@
+//
+//  Breed.swift
+//  Domain
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Foundation
 
 public struct Breed: Identifiable, Hashable, Sendable {
+    private static let imageCDNPrefix = "https://cdn2.thecatapi.com/images/"
+    private static let imageExtension = ".jpg"
+
     public let id: String
     public let name: String
     public let origin: String
@@ -32,6 +42,6 @@ public struct Breed: Identifiable, Hashable, Sendable {
 
     public var imageURL: URL? {
         guard let referenceImageId, !referenceImageId.isEmpty else { return nil }
-        return URL(string: "https://cdn2.thecatapi.com/images/\(referenceImageId).jpg")
+        return URL(string: "\(Self.imageCDNPrefix)\(referenceImageId)\(Self.imageExtension)")
     }
 }

@@ -1,3 +1,10 @@
+//
+//  FavouritesViewModel.swift
+//  FavouritesFeature
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Foundation
 import Observation
 import Domain
@@ -7,6 +14,13 @@ import Domain
 public final class FavouritesViewModel {
     public var breeds: [Breed] = []
     public var errorMessage: String?
+
+    public var averageLifespan: Double? {
+        let upperBounds = breeds.compactMap { $0.lifeSpan?.upperBound }
+        guard !upperBounds.isEmpty else { return nil }
+        let total = upperBounds.reduce(0, +)
+        return Double(total) / Double(upperBounds.count)
+    }
 
     private let breedRepository: BreedRepository
     private let favouritesStore: FavouritesStore
@@ -27,7 +41,7 @@ public final class FavouritesViewModel {
             }
             breeds = fetched.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
         } catch {
-            errorMessage = Self.message(for: error)
+            errorMessage = BreedRepositoryError.displayMessage(for: error)
         }
     }
 
@@ -36,20 +50,7 @@ public final class FavouritesViewModel {
             try await favouritesStore.setFavourite(false, for: breedId)
             breeds.removeAll { $0.id == breedId }
         } catch {
-            errorMessage = Self.message(for: error)
+            errorMessage = BreedRepositoryError.displayMessage(for: error)
         }
-    }
-
-    private static func message(for error: Error) -> String {
-        if let repoError = error as? BreedRepositoryError {
-            switch repoError {
-            case .offline: return "You appear to be offline."
-            case .notFound: return "Breed not found."
-            case .decoding: return "Could not read response."
-            case .network(let status): return "Network error (\(status))."
-            case .unknown: return "Something went wrong."
-            }
-        }
-        return error.localizedDescription
     }
 }

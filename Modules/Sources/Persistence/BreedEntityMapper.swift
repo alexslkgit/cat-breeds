@@ -1,3 +1,10 @@
+//
+//  BreedEntityMapper.swift
+//  Persistence
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Foundation
 import SwiftData
 import Domain
@@ -17,13 +24,13 @@ public enum BreedEntityMapper {
     }
 
     @discardableResult
-    public static func toEntity(_ breed: Breed, context: ModelContext) -> BreedEntity {
+    public static func toEntity(_ breed: Breed, context: ModelContext) throws -> BreedEntity {
         let id = breed.id
         let descriptor = FetchDescriptor<BreedEntity>(predicate: #Predicate { $0.id == id })
         let lifeSpanRaw = breed.lifeSpan.map { "\($0.minYears) - \($0.maxYears)" }
         let wikipediaURLString = breed.wikipediaURL?.absoluteString
 
-        if let existing = try? context.fetch(descriptor).first {
+        if let existing = try context.fetch(descriptor).first {
             existing.name = breed.name
             existing.origin = breed.origin
             existing.temperament = breed.temperament

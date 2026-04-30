@@ -1,3 +1,10 @@
+//
+//  BreedListViewModel.swift
+//  BreedsListFeature
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Foundation
 import Observation
 import Domain
@@ -5,6 +12,8 @@ import Domain
 @MainActor
 @Observable
 public final class BreedListViewModel {
+    private static let searchDebounceNanoseconds: UInt64 = 300_000_000
+
     public var breeds: [Breed] = []
     public var searchQuery: String = ""
     public var isLoading: Bool = false
@@ -16,6 +25,7 @@ public final class BreedListViewModel {
     private let breedRepository: BreedRepository
     private let favouritesStore: FavouritesStore
     private let pageSize: Int
+    private var searchTask: Task<Void, Never>?
 
     public init(
         breedRepository: BreedRepository,
@@ -29,18 +39,36 @@ public final class BreedListViewModel {
 
     public func loadNextPage() async {
         guard !isLoading, hasMore else { return }
+        let capturedPage = currentPage
+        let capturedSearchEmpty = searchQuery.isEmpty
         isLoading = true
         defer { isLoading = false }
 
         do {
-            let page = try await breedRepository.breeds(page: currentPage, limit: pageSize)
+            let page = try await breedRepository.breeds(page: capturedPage, limit: pageSize)
+            guard capturedPage == currentPage,
+                  capturedSearchEmpty == searchQuery.isEmpty else { return }
             breeds.append(contentsOf: page)
             currentPage += 1
             if page.count < pageSize {
                 hasMore = false
             }
+            errorMessage = nil
+        } catch is CancellationError {
+            return
         } catch {
-            errorMessage = Self.message(for: error)
+            guard capturedPage == currentPage,
+                  capturedSearchEmpty == searchQuery.isEmpty else { return }
+            errorMessage = BreedRepositoryError.displayMessage(for: error)
+        }
+    }
+
+    public func queryDidChange() {
+        searchTask?.cancel()
+        searchTask = Task { [weak self] in
+            try? await Task.sleep(nanoseconds: Self.searchDebounceNanoseconds)
+            if Task.isCancelled { return }
+            await self?.search()
         }
     }
 
@@ -53,15 +81,21 @@ public final class BreedListViewModel {
             return
         }
 
+        let capturedQuery = searchQuery
         isLoading = true
         defer { isLoading = false }
 
         do {
-            let results = try await breedRepository.searchBreeds(query: searchQuery)
+            let results = try await breedRepository.searchBreeds(query: capturedQuery)
+            guard capturedQuery == searchQuery else { return }
             breeds = results
             hasMore = false
+            errorMessage = nil
+        } catch is CancellationError {
+            return
         } catch {
-            errorMessage = Self.message(for: error)
+            guard capturedQuery == searchQuery else { return }
+            errorMessage = BreedRepositoryError.displayMessage(for: error)
         }
     }
 
@@ -75,7 +109,7 @@ public final class BreedListViewModel {
                 favouriteIDs.remove(breedId)
             }
         } catch {
-            errorMessage = Self.message(for: error)
+            errorMessage = BreedRepositoryError.displayMessage(for: error)
         }
     }
 
@@ -83,21 +117,8 @@ public final class BreedListViewModel {
         if let initial = try? await favouritesStore.favouriteIDs() {
             favouriteIDs = initial
         }
-        for await ids in favouritesStore.favouriteIDsStream {
+        for await ids in favouritesStore.favouriteIDsStream() {
             favouriteIDs = ids
         }
-    }
-
-    private static func message(for error: Error) -> String {
-        if let repoError = error as? BreedRepositoryError {
-            switch repoError {
-            case .offline: return "You appear to be offline."
-            case .notFound: return "Breed not found."
-            case .decoding: return "Could not read response."
-            case .network(let status): return "Network error (\(status))."
-            case .unknown: return "Something went wrong."
-            }
-        }
-        return error.localizedDescription
     }
 }

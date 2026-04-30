@@ -1,3 +1,10 @@
+//
+//  BreedDetailViewModel.swift
+//  BreedDetailFeature
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Foundation
 import Observation
 import Domain
@@ -27,7 +34,7 @@ public final class BreedDetailViewModel {
             let ids = (try? await favouritesStore.favouriteIDs()) ?? []
             isFavourite = ids.contains(breedId)
         } catch {
-            errorMessage = Self.message(for: error)
+            errorMessage = BreedRepositoryError.displayMessage(for: error)
         }
     }
 
@@ -38,20 +45,15 @@ public final class BreedDetailViewModel {
             try await favouritesStore.setFavourite(next, for: id)
             isFavourite = next
         } catch {
-            errorMessage = Self.message(for: error)
+            errorMessage = BreedRepositoryError.displayMessage(for: error)
         }
     }
 
-    private static func message(for error: Error) -> String {
-        if let repoError = error as? BreedRepositoryError {
-            switch repoError {
-            case .offline: return "You appear to be offline."
-            case .notFound: return "Breed not found."
-            case .decoding: return "Could not read response."
-            case .network(let status): return "Network error (\(status))."
-            case .unknown: return "Something went wrong."
+    public func startObservingFavourites() async {
+        for await ids in favouritesStore.favouriteIDsStream() {
+            if let id = breed?.id {
+                isFavourite = ids.contains(id)
             }
         }
-        return error.localizedDescription
     }
 }

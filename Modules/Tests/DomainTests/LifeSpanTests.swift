@@ -1,3 +1,10 @@
+//
+//  LifeSpanTests.swift
+//  DomainTests
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Testing
 @testable import Domain
 

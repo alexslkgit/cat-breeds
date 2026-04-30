@@ -1,10 +1,20 @@
+//
+//  MainTabView.swift
+//  CatBreeds
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import SwiftUI
 import Domain
 import BreedsListFeature
 import BreedDetailFeature
 import FavouritesFeature
 
-struct ContentView: View {
+struct MainTabView: View {
+    private static let breedsTabTitle = "Breeds"
+    private static let favouritesTabTitle = "Favourites"
+
     let breedRepository: BreedRepository
     let favouritesStore: FavouritesStore
 
@@ -28,7 +38,7 @@ struct ContentView: View {
                 }
             }
             .tabItem {
-                Label("Breeds", systemImage: "list.bullet")
+                Label(Self.breedsTabTitle, systemImage: "list.bullet")
             }
 
             FavouritesView(
@@ -44,7 +54,7 @@ struct ContentView: View {
                 }
             )
             .tabItem {
-                Label("Favourites", systemImage: "star")
+                Label(Self.favouritesTabTitle, systemImage: "star")
             }
         }
     }

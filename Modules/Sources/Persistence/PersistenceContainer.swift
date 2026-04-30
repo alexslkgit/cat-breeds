@@ -1,3 +1,10 @@
+//
+//  PersistenceContainer.swift
+//  Persistence
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Foundation
 import SwiftData
 

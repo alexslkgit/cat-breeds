@@ -1,3 +1,10 @@
+//
+//  LifeSpan.swift
+//  Domain
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Foundation
 
 public struct LifeSpan: Hashable, Sendable {

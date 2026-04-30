@@ -1,3 +1,10 @@
+//
+//  PersistenceTests.swift
+//  PersistenceTests
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Testing
 import Foundation
 import SwiftData
@@ -22,7 +29,7 @@ import Domain
         wikipediaURL: URL(string: "https://en.wikipedia.org/wiki/Abyssinian_cat")
     )
 
-    let inserted = BreedEntityMapper.toEntity(breed, context: context)
+    let inserted = try BreedEntityMapper.toEntity(breed, context: context)
     try context.save()
     #expect(inserted.id == "abys")
     #expect(inserted.isFavourite == false)
@@ -40,7 +47,7 @@ import Domain
         referenceImageId: breed.referenceImageId,
         wikipediaURL: breed.wikipediaURL
     )
-    let upserted = BreedEntityMapper.toEntity(updatedDomain, context: context)
+    let upserted = try BreedEntityMapper.toEntity(updatedDomain, context: context)
     try context.save()
 
     #expect(upserted.id == "abys")

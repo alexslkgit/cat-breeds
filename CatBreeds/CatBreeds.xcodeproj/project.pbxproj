@@ -15,27 +15,8 @@
 		67BB290C2FA264260009B62A /* FavouritesFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 67BB29062FA264260009B62A /* FavouritesFeature */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		67BB28162FA264260009B62A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 67BB28002FA264240009B62A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 67BB28072FA264240009B62A;
-			remoteInfo = CatBreeds;
-		};
-		67BB28202FA264260009B62A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 67BB28002FA264240009B62A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 67BB28072FA264240009B62A;
-			remoteInfo = CatBreeds;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		67BB28082FA264240009B62A /* CatBreeds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatBreeds.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		67BB28152FA264260009B62A /* CatBreedsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatBreedsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		67BB281F2FA264260009B62A /* CatBreedsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatBreedsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67BB28402FA264260009B62A /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = ../Secrets.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -43,16 +24,6 @@
 		67BB280A2FA264240009B62A /* CatBreeds */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CatBreeds;
-			sourceTree = "<group>";
-		};
-		67BB28182FA264260009B62A /* CatBreedsTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CatBreedsTests;
-			sourceTree = "<group>";
-		};
-		67BB28222FA264260009B62A /* CatBreedsUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CatBreedsUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -71,20 +42,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		67BB28122FA264260009B62A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		67BB281C2FA264260009B62A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -93,8 +50,6 @@
 			children = (
 				67BB28402FA264260009B62A /* Secrets.xcconfig */,
 				67BB280A2FA264240009B62A /* CatBreeds */,
-				67BB28182FA264260009B62A /* CatBreedsTests */,
-				67BB28222FA264260009B62A /* CatBreedsUITests */,
 				67BB28092FA264240009B62A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,8 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				67BB28082FA264240009B62A /* CatBreeds.app */,
-				67BB28152FA264260009B62A /* CatBreedsTests.xctest */,
-				67BB281F2FA264260009B62A /* CatBreedsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,52 +93,6 @@
 			productReference = 67BB28082FA264240009B62A /* CatBreeds.app */;
 			productType = "com.apple.product-type.application";
 		};
-		67BB28142FA264260009B62A /* CatBreedsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 67BB282C2FA264260009B62A /* Build configuration list for PBXNativeTarget "CatBreedsTests" */;
-			buildPhases = (
-				67BB28112FA264260009B62A /* Sources */,
-				67BB28122FA264260009B62A /* Frameworks */,
-				67BB28132FA264260009B62A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				67BB28172FA264260009B62A /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				67BB28182FA264260009B62A /* CatBreedsTests */,
-			);
-			name = CatBreedsTests;
-			packageProductDependencies = (
-			);
-			productName = CatBreedsTests;
-			productReference = 67BB28152FA264260009B62A /* CatBreedsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		67BB281E2FA264260009B62A /* CatBreedsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 67BB282F2FA264260009B62A /* Build configuration list for PBXNativeTarget "CatBreedsUITests" */;
-			buildPhases = (
-				67BB281B2FA264260009B62A /* Sources */,
-				67BB281C2FA264260009B62A /* Frameworks */,
-				67BB281D2FA264260009B62A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				67BB28212FA264260009B62A /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				67BB28222FA264260009B62A /* CatBreedsUITests */,
-			);
-			name = CatBreedsUITests;
-			packageProductDependencies = (
-			);
-			productName = CatBreedsUITests;
-			productReference = 67BB281F2FA264260009B62A /* CatBreedsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -199,14 +106,6 @@
 					67BB28072FA264240009B62A = {
 						CreatedOnToolsVersion = 26.4.1;
 					};
-					67BB28142FA264260009B62A = {
-						CreatedOnToolsVersion = 26.4.1;
-						TestTargetID = 67BB28072FA264240009B62A;
-					};
-					67BB281E2FA264260009B62A = {
-						CreatedOnToolsVersion = 26.4.1;
-						TestTargetID = 67BB28072FA264240009B62A;
-					};
 				};
 			};
 			buildConfigurationList = 67BB28032FA264240009B62A /* Build configuration list for PBXProject "CatBreeds" */;
@@ -219,7 +118,7 @@
 			mainGroup = 67BB27FF2FA264240009B62A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				67BB29002FA264260009B62A /* XCLocalSwiftPackageReference "Modules" */,
+				67BB29002FA264260009B62A /* XCLocalSwiftPackageReference "../Modules" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 67BB28092FA264240009B62A /* Products */;
@@ -227,28 +126,12 @@
 			projectRoot = "";
 			targets = (
 				67BB28072FA264240009B62A /* CatBreeds */,
-				67BB28142FA264260009B62A /* CatBreedsTests */,
-				67BB281E2FA264260009B62A /* CatBreedsUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		67BB28062FA264240009B62A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		67BB28132FA264260009B62A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		67BB281D2FA264260009B62A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -265,34 +148,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		67BB28112FA264260009B62A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		67BB281B2FA264260009B62A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		67BB28172FA264260009B62A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 67BB28072FA264240009B62A /* CatBreeds */;
-			targetProxy = 67BB28162FA264260009B62A /* PBXContainerItemProxy */;
-		};
-		67BB28212FA264260009B62A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 67BB28072FA264240009B62A /* CatBreeds */;
-			targetProxy = 67BB28202FA264260009B62A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		67BB28272FA264260009B62A /* Debug */ = {
@@ -486,90 +342,6 @@
 			};
 			name = Release;
 		};
-		67BB282D2FA264260009B62A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5LHF76Y88Y;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.alexslk.CatBreedsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CatBreeds.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CatBreeds";
-			};
-			name = Debug;
-		};
-		67BB282E2FA264260009B62A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5LHF76Y88Y;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.alexslk.CatBreedsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CatBreeds.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CatBreeds";
-			};
-			name = Release;
-		};
-		67BB28302FA264260009B62A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5LHF76Y88Y;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.alexslk.CatBreedsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CatBreeds;
-			};
-			name = Debug;
-		};
-		67BB28312FA264260009B62A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5LHF76Y88Y;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.alexslk.CatBreedsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CatBreeds;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -591,28 +363,10 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		67BB282C2FA264260009B62A /* Build configuration list for PBXNativeTarget "CatBreedsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				67BB282D2FA264260009B62A /* Debug */,
-				67BB282E2FA264260009B62A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		67BB282F2FA264260009B62A /* Build configuration list for PBXNativeTarget "CatBreedsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				67BB28302FA264260009B62A /* Debug */,
-				67BB28312FA264260009B62A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		67BB29002FA264260009B62A /* XCLocalSwiftPackageReference "Modules" */ = {
+		67BB29002FA264260009B62A /* XCLocalSwiftPackageReference "../Modules" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Modules;
 		};

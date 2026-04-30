@@ -1,3 +1,10 @@
+//
+//  CatAPIClientTests.swift
+//  NetworkingTests
+//
+//  Created by Slobodianiuk Oleksandr on 29.04.2026.
+//
+
 import Foundation
 import Testing
 import Domain
@@ -71,5 +78,21 @@ struct CatAPIClientTests {
         await #expect(throws: BreedRepositoryError.notFound) {
             _ = try await makeClient().breed(id: "missing")
         }
+    }
+
+    @Test func searchBreedsReturnsDecodedBreeds() async throws {
+        let body = #"""
+        [{"id":"beng","name":"Bengal","origin":"United States","temperament":"Alert","description":"Desc","life_span":"12 - 15","reference_image_id":"abc123","wikipedia_url":"https://en.wikipedia.org/wiki/Bengal_(cat)"}]
+        """#.data(using: .utf8)!
+
+        MockURLProtocol.requestHandler = { request in
+            #expect(request.url?.path == "/v1/breeds/search")
+            #expect(request.url?.query?.contains("q=ben") == true)
+            return (self.httpResponse(200, url: request.url!), body)
+        }
+
+        let result = try await makeClient().searchBreeds(query: "ben")
+        #expect(result.count == 1)
+        #expect(result[0].id == "beng")
     }
 }
