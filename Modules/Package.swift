@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "Modules",
-    platforms: [.iOS(.v17)],
+    platforms: [.iOS(.v17), .macOS(.v14)],
     products: [
         .library(name: "Domain", type: .static, targets: ["Domain"]),
         .library(name: "Networking", type: .static, targets: ["Networking"]),
